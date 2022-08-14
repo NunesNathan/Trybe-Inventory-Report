@@ -22,3 +22,26 @@ def test_cria_produto():
     assert (
         fake_product
         .instrucoes_de_armazenamento == product.instrucoes_de_armazenamento)
+
+
+def test_relatorio_produto():
+    fake_product = ProductFactory()
+    product = Product(
+        fake_product.id,
+        fake_product.nome_do_produto,
+        fake_product.nome_da_empresa,
+        fake_product.data_de_fabricacao,
+        fake_product.data_de_validade,
+        fake_product.numero_de_serie,
+        fake_product.instrucoes_de_armazenamento)
+
+    cast = (
+            f"O produto {fake_product.nome_do_produto}"
+            f" fabricado em {fake_product.data_de_fabricacao}"
+            f" por {fake_product.nome_da_empresa} com validade"
+            f" até {fake_product.data_de_validade}"
+            " precisa ser armazenado"
+            f" {fake_product.instrucoes_de_armazenamento}."
+            )
+
+    assert str(product) == cast
